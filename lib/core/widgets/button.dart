@@ -33,7 +33,7 @@ class ButtonWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       width: width ?? SizeConfig.width(context, 1),
-      height: height ?? SizeConfig.height(context, 0.06),
+      height: height ?? SizeConfig.height(context, 0.07),
       margin: EdgeInsets.symmetric(
         vertical: marginHeight ?? SizeConfig.height(context, 0.02),
         horizontal: marginWidth ?? SizeConfig.width(context, 0.02),
@@ -41,7 +41,7 @@ class ButtonWidget extends StatelessWidget {
       decoration: BoxDecoration(
         color: btnColor ?? GlobalColor.btnColor,
         borderRadius: BorderRadius.all(
-          Radius.circular(radiusWidth ?? SizeConfig.width(context, 0.06)),
+          Radius.circular(radiusWidth ?? SizeConfig.width(context, 0.08)),
         ),
       ),
       child: TextButton(
@@ -52,8 +52,8 @@ class ButtonWidget extends StatelessWidget {
         child: Text(
           text,
           style: TextStyle(
-            fontSize: fontSize ?? SizeConfig.width(context, 0.04),
-            fontWeight: fontWeight ?? FontWeight.w600,
+            fontSize: fontSize ?? SizeConfig.width(context, 0.05),
+            fontWeight: fontWeight ?? FontWeight.w500,
             color: Colors.white, // Ensure text color is set
           ),
         ),

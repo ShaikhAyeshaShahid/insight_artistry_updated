@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:insight_artistry_updated/src/presentation/views/home_screen/home_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/login_signup_screens/login_screen.dart';
+import 'package:insight_artistry_updated/src/presentation/views/login_signup_screens/signup_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/onboarding_screens/onboarding_screens_1.dart';
 import 'package:insight_artistry_updated/src/presentation/views/onboarding_screens/onboarding_screens_2.dart';
 import 'package:insight_artistry_updated/src/presentation/views/onboarding_screens/onboarding_screens_3.dart';
@@ -45,6 +47,12 @@ class MyApp extends StatelessWidget {
     }
     if (routeSettings.name == AppRoute.loginScreen) {
       return MaterialPageRoute(builder: (context) => const LoginScreen());
+    }
+    if (routeSettings.name == AppRoute.signUpScreen) {
+      return MaterialPageRoute(builder: (context) => const SignUpScreen());
+    }
+    if (routeSettings.name == AppRoute.homeScreen) {
+      return MaterialPageRoute(builder: (context) => const HomeScreen());
     }
     assert(false, 'Need to implement ${routeSettings.name}');
     return null;

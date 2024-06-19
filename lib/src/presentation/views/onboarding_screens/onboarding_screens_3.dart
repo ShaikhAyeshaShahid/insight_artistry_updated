@@ -5,6 +5,7 @@ import 'package:insight_artistry_updated/core/widgets/heading.dart';
 import 'package:insight_artistry_updated/core/widgets/sub_heading.dart';
 
 import '../../../../app/routes/app_route.dart';
+import '../../../../constant/colors.dart';
 import '../../../../core/widgets/button.dart';
 
 class OnboardingScreen3 extends StatefulWidget {
@@ -18,9 +19,9 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.bgColor,
       body: Container(
           width: SizeConfig.width(context, 1),
-          color: Colors.white,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -35,14 +36,14 @@ class _OnboardingScreen3State extends State<OnboardingScreen3> {
               buildVerticalDivider(context, 0.04),
               Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.width(context, 0.04),
+                    horizontal: SizeConfig.width(context, 0.05),
                   ),
-                  child: const HeadingTextWidget(text: "Buy & Enjoy",)
+                  child: const HeadingTextWidget(text: "Buy & Enjoy", fontWeight: FontWeight.w900,)
               ),
               buildVerticalDivider(context, 0.02),
               Padding(
                   padding: EdgeInsets.symmetric(
-                    horizontal: SizeConfig.width(context, 0.04),
+                    horizontal: SizeConfig.width(context, 0.05),
                   ),
                   child: const SubHeadingTextWidget(text:"Simple and secure shopping at your fingertips.",)
               ),

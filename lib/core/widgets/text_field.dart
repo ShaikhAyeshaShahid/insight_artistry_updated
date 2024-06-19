@@ -55,27 +55,26 @@ class TextFieldWidget extends StatelessWidget {
         filled: true,
         fillColor: Colors.white.withOpacity(0.8),
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(SizeConfig.width(context, 0.05)),
+          borderRadius: BorderRadius.circular(
+            SizeConfig.width(context, 0.05),
+          ),
         ),
         enabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(SizeConfig.width(context, 0.05)),
-          borderSide:
-              const BorderSide(color: Colors.grey), // Customize the border color
+          borderSide: BorderSide(color: GlobalColor.borderTextColor),
         ),
         focusedBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(SizeConfig.width(context, 0.05)),
-          borderSide:
-              BorderSide(color: GlobalColor.headTextColor), // Customize the border color
+          borderSide: BorderSide(
+              color: GlobalColor.headTextColor), // Customize the border color
         ),
         errorBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(SizeConfig.width(context, 0.05)),
-          borderSide:
-              const BorderSide(color: Colors.red), // Customize the border color
+          borderSide: const BorderSide(color: Colors.red),
         ),
         disabledBorder: OutlineInputBorder(
           borderRadius: BorderRadius.circular(SizeConfig.width(context, 0.05)),
-          borderSide:
-              const BorderSide(color: Colors.grey), // Customize the border color
+          borderSide: const BorderSide(color: Colors.transparent),
         ),
         hintText: hint ?? "",
         prefixIcon: icon ? prefixIcon ?? const Icon(Icons.person) : null,
@@ -85,8 +84,8 @@ class TextFieldWidget extends StatelessWidget {
             : null,
       ),
       style: TextStyle(
-          fontWeight: fontWeight ?? FontWeight.w600,
-          fontSize: fontSize ?? SizeConfig.width(context, 0.03),
+          fontWeight: fontWeight ?? FontWeight.w500,
+          fontSize: fontSize ?? SizeConfig.width(context, 0.04),
           color: color ?? GlobalColor.textColor),
     );
   }

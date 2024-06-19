@@ -20,7 +20,7 @@ class _SplashScreenState extends State<SplashScreen> {
     // TODO: implement initState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
-       Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(Duration(seconds: 3), () {
         Navigator.pushReplacementNamed(context, AppRoute.onboardingScreen1);
       });
     });
@@ -33,7 +33,7 @@ class _SplashScreenState extends State<SplashScreen> {
         alignment: Alignment.center,
         height: SizeConfig.height(context, 1),
         width: SizeConfig.width(context, 1),
-        color: GlobalColor.lightGreyColor,
+        color: GlobalColor.bgColor,
         child: Image.asset(
           'assets/images/logo.png',
           fit: BoxFit.fitHeight,

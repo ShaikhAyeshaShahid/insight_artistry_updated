@@ -19,6 +19,7 @@ class SubHeadingTextWidget extends StatelessWidget {
         fontWeight: fontWeight ?? FontWeight.w600,
         fontSize: fontSize ?? SizeConfig.width(context, 0.03),
         color: color ?? GlobalColor.textColor),
+      textAlign: TextAlign.center,
     );
   }
 }
