@@ -13,5 +13,6 @@ class GlobalColor{
   static Color ratingTextColor = const Color(0xFFF4BB00);
   static Color newBgColor = const Color(0xFFFF0404);
   static Color productBgColor = const Color(0xFFE3E3E3);
+  static Color productDisColor = const Color(0xFF828282);
 
 }
