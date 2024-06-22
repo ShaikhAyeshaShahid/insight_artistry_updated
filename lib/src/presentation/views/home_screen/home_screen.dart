@@ -2,6 +2,7 @@ import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:awesome_bottom_bar/tab_item.dart';
 import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:flutter/material.dart';
+import 'package:insight_artistry_updated/app/routes/app_route.dart';
 import 'package:insight_artistry_updated/core/widgets/sub_heading.dart';
 
 import '../../../../constant/colors.dart';
@@ -214,16 +215,21 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   Widget _buildCategoriesImagesList(BuildContext context) {
-    return Container(
-      padding: EdgeInsets.only(left: SizeConfig.width(context, 0.025)),
-      width: SizeConfig.width(context, 1),
-      height: SizeConfig.height(context, 0.4),
-      child: ListView.builder(
-        scrollDirection: Axis.horizontal,
-        itemCount: _categories.length,
-        itemBuilder: (context, index) {
-          return _buildCategoryItem(context, index);
-        },
+    return GestureDetector(
+      onTap: (){
+        Navigator.pushNamed(context, AppRoute.productDisplayScreen);
+      },
+      child: Container(
+        padding: EdgeInsets.only(left: SizeConfig.width(context, 0.025)),
+        width: SizeConfig.width(context, 1),
+        height: SizeConfig.height(context, 0.4),
+        child: ListView.builder(
+          scrollDirection: Axis.horizontal,
+          itemCount: _categories.length,
+          itemBuilder: (context, index) {
+            return _buildCategoryItem(context, index);
+          },
+        ),
       ),
     );
   }

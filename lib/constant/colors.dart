@@ -14,5 +14,6 @@ class GlobalColor{
   static Color newBgColor = const Color(0xFFFF0404);
   static Color productBgColor = const Color(0xFFE3E3E3);
   static Color productDisColor = const Color(0xFF828282);
+  static Color quantityBgColor = const Color(0xFFCDCBCB);
 
 }

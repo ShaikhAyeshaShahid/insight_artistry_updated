@@ -6,5 +6,6 @@ class AppRoute{
   static String onboardingScreen2 = '/onboardingScreen2';
   static String onboardingScreen3 = '/onboardingScreen3';
   static String homeScreen = '/homeScreen';
+  static String productDisplayScreen = '/productDisplayScreen';
 
 }

@@ -5,6 +5,7 @@ import 'package:insight_artistry_updated/src/presentation/views/login_signup_scr
 import 'package:insight_artistry_updated/src/presentation/views/onboarding_screens/onboarding_screens_1.dart';
 import 'package:insight_artistry_updated/src/presentation/views/onboarding_screens/onboarding_screens_2.dart';
 import 'package:insight_artistry_updated/src/presentation/views/onboarding_screens/onboarding_screens_3.dart';
+import 'package:insight_artistry_updated/src/presentation/views/product_display_screen/product_display_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/splash_screen.dart';
 
 import 'app/routes/app_route.dart';
@@ -53,6 +54,9 @@ class MyApp extends StatelessWidget {
     }
     if (routeSettings.name == AppRoute.homeScreen) {
       return MaterialPageRoute(builder: (context) => const HomeScreen());
+    }
+    if (routeSettings.name == AppRoute.productDisplayScreen) {
+      return MaterialPageRoute(builder: (context) => const ProductDisplayScreen());
     }
     assert(false, 'Need to implement ${routeSettings.name}');
     return null;
