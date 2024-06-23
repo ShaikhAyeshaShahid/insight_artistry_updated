@@ -8,6 +8,7 @@ import 'package:intl/intl.dart';
 import '../../../../app/routes/app_route.dart';
 import '../../../../constant/colors.dart';
 import '../../../../constant/divider.dart';
+import '../../../../core/widgets/button.dart';
 import '../../../../core/widgets/heading.dart';
 import '../../../../core/widgets/sub_heading.dart';
 import '../../widgets/app_bar.dart';
@@ -43,35 +44,43 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      bottomNavigationBar: ButtonWidget(
+        marginWidth: SizeConfig.width(context, 0.05),
+        marginHeight: SizeConfig.height(context, 0.01),
+        onTab: () {
+          Navigator.pushNamed(context, AppRoute.homeScreen);
+        },
+        text: "Add to cart | \$12,500",
+        fontSize: SizeConfig.width(context, 0.04),
+        fontWeight: FontWeight.w800,
+      ),
       body: SingleChildScrollView(
-        child: Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Stack(
-                children: [
-                  Container(
-                    height: SizeConfig.height(context, 0.6),
-                    width: SizeConfig.width(context, 1),
-                    color: GlobalColor.productBgColor,
-                    child: Image.asset('assets/images/product_img.png'),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Stack(
+              children: [
+                Container(
+                  height: SizeConfig.height(context, 0.5),
+                  width: SizeConfig.width(context, 1),
+                  color: GlobalColor.productBgColor,
+                  child: Image.asset('assets/images/product_img.png'),
+                ),
+                Container(
+                  padding: EdgeInsets.symmetric(
+                    horizontal: SizeConfig.width(context, 0.05),
                   ),
-                  Container(
-                    padding: EdgeInsets.symmetric(
-                      horizontal: SizeConfig.width(context, 0.05),
-                    ),
-                    margin:
-                        EdgeInsets.only(top: SizeConfig.height(context, 0.02)),
-                    width: SizeConfig.width(context, 1),
-                    height: SizeConfig.height(context, 0.1),
-                    child: AppBarWidget(),
-                  ),
-                ],
-              ),
-              buildVerticalDivider(context, 0.04),
-              _buildSectionTitle(context, "Modern Chair"),
-            ],
-          ),
+                  margin:
+                      EdgeInsets.only(top: SizeConfig.height(context, 0.02)),
+                  width: SizeConfig.width(context, 1),
+                  height: SizeConfig.height(context, 0.1),
+                  child: AppBarWidget(),
+                ),
+              ],
+            ),
+            buildVerticalDivider(context, 0.02),
+            _buildSectionTitle(context, "Modern Chair"),
+          ],
         ),
       ),
     );
@@ -135,7 +144,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
           ),
           _buildBestSellerList(context),
           Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               HeadingTextWidget(
                 text: 'Color',
@@ -143,28 +152,33 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
                 color: GlobalColor.head2TextColor,
                 fontWeight: FontWeight.w900,
               ),
+              buildHorizontalDivider(context, 0.05),
               CircleAvatar(
                 radius: SizeConfig.width(context, 0.02),
                 backgroundColor: Colors.red,
               ),
+              buildHorizontalDivider(context, 0.04),
               CircleAvatar(
                 radius: SizeConfig.width(context, 0.02),
                 backgroundColor: Colors.grey,
               ),
+              buildHorizontalDivider(context, 0.04),
               CircleAvatar(
                 radius: SizeConfig.width(context, 0.02),
                 backgroundColor: Colors.brown,
               ),
+              buildHorizontalDivider(context, 0.3),
               CartStepperInt(
                 value: _counter,
-                size: 20,
+                size: SizeConfig.height(context, 0.03),
                 didChangeCount: (count) {
                   setState(() {
                     _counter = count;
                   });
                 },
                 style: CartStepperStyle(
-
+                  activeBackgroundColor: GlobalColor.head2TextColor,
+                  border: Border.all(color: Colors.white,),
                 ),
               ),
             ],
@@ -183,7 +197,6 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
               ),
             ]),
           ),*/
-
         ],
       ),
     );
