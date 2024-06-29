@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:insight_artistry_updated/src/presentation/views/cart_screen/cart_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/home_screen/home_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/login_signup_screens/login_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/login_signup_screens/signup_screen.dart';
@@ -57,6 +58,9 @@ class MyApp extends StatelessWidget {
     }
     if (routeSettings.name == AppRoute.productDisplayScreen) {
       return MaterialPageRoute(builder: (context) => const ProductDisplayScreen());
+    }
+    if (routeSettings.name == AppRoute.cartScreen) {
+      return MaterialPageRoute(builder: (context) => const CartScreen());
     }
     assert(false, 'Need to implement ${routeSettings.name}');
     return null;

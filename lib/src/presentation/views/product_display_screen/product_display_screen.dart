@@ -48,7 +48,7 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
         marginWidth: SizeConfig.width(context, 0.05),
         marginHeight: SizeConfig.height(context, 0.01),
         onTab: () {
-          Navigator.pushNamed(context, AppRoute.homeScreen);
+          Navigator.pushNamed(context, AppRoute.cartScreen);
         },
         text: "Add to cart | \$12,500",
         fontSize: SizeConfig.width(context, 0.04),
