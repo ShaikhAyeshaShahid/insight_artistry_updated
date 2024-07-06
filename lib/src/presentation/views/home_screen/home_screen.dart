@@ -70,6 +70,15 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
 
+  List<Widget> _screens = [
+    Center(child: Text('Notification Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
+    Center(child: Text('Favorite Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
+    Center(child: Text('Home Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
+    Center(child: Text('Cart Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
+    Center(child: Text('Profile Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
+  ];
+
+
 
   int visit = 0;
   double height = 30;
@@ -82,18 +91,6 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalColor.bgColor,
-      bottomNavigationBar: BottomBarFloating(
-        iconSize: SizeConfig.width(context, 0.07),
-        items: items,
-        backgroundColor: Colors.white,
-        color: GlobalColor.head2TextColor,
-        colorSelected: GlobalColor.head2TextColor,
-        indexSelected: visit,
-        // paddingVertical: SizeConfig.height(context, 0.02),
-        onTap: (int index) => setState(() {
-          visit = index;
-        }),
-      ),
       body: SingleChildScrollView(
         child: Column(
           // mainAxisAlignment: MainAxisAlignment.spaceEvenly,

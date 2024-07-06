@@ -8,5 +8,9 @@ class AppRoute{
   static String homeScreen = '/homeScreen';
   static String productDisplayScreen = '/productDisplayScreen';
   static String cartScreen = '/cartScreen';
+  static String dashboardScreen = '/dashboardScreen';
+  static String favoriteScreen = '/favoriteScreen';
+  static String notificationScreen = '/notificationScreen';
+  static String profileScreen = '/profileScreen';
 
 }

@@ -96,6 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     marginWidth: SizeConfig.width(context, 0.15),
                     onTab: () {
                       Navigator.pushNamed(context, AppRoute.homeScreen);
+                      // Navigator.pushNamed(context, AppRoute.homeScreen);
                     },
                     text: "Login"),
                 buildVerticalDivider(context, 0.02),
