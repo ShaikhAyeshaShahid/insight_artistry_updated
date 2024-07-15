@@ -2,8 +2,11 @@ import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:awesome_bottom_bar/tab_item.dart';
 import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insight_artistry_updated/app/routes/app_route.dart';
+import 'package:insight_artistry_updated/core/utils/enums/enums.dart';
 import 'package:insight_artistry_updated/core/widgets/sub_heading.dart';
+import 'package:insight_artistry_updated/src/presentation/bloc/product/product_bloc.dart';
 
 import '../../../../constant/colors.dart';
 import '../../../../constant/divider.dart';
@@ -20,6 +23,13 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   TextEditingController _searchController = TextEditingController();
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    context.read<ProductBloc>().add(ProductFetched());
+  }
 
   List<String> _categories = [
     'Abstract',
@@ -69,50 +79,52 @@ class _HomeScreenState extends State<HomeScreen> {
     ),
   ];
 
-
-  List<Widget> _screens = [
-    Center(child: Text('Notification Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Favorite Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Home Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Cart Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Profile Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-  ];
-
-
-
   int visit = 0;
   double height = 30;
-  Color colorSelect =const Color(0XFF0686F8);
+  Color colorSelect = const Color(0XFF0686F8);
   Color color = const Color(0XFF7AC0FF);
   Color color2 = const Color(0XFF96B1FD);
-  Color bgColor = const  Color(0XFF1752FE);
+  Color bgColor = const Color(0XFF1752FE);
   final String uniqueTag = '';
-
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: GlobalColor.bgColor,
-      body: SingleChildScrollView(
-        child: Column(
-          // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            buildVerticalDivider(context, 0.05),
-            _buildHeader(context),
-            buildVerticalDivider(context, 0.04),
-            _buildSearchField(context),
-            buildVerticalDivider(context, 0.04),
-            _buildSectionTitle(context, "Categories"),
-            _buildCategoriesList(context),
-            _buildCategoriesImagesList(context),
-            buildVerticalDivider(context, 0.04),
-            _buildSectionTitle(context, "Best Seller"),
-            buildVerticalDivider(context, 0.01),
-            _buildBestSellerList(context),
-            buildVerticalDivider(context, 0.02),
-          ],
-        ),
+      body: BlocBuilder<ProductBloc, ProductState>(
+        builder: (context, state) {
+          switch (state.productStatus) {
+            case ProductStatus.loading:
+              return CircularProgressIndicator();
+            case ProductStatus.failure:
+              return Center(
+                child: Text(state.message.toString()),
+              );
+            case ProductStatus.success:
+              return SingleChildScrollView(
+                child: Column(
+                  // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    buildVerticalDivider(context, 0.05),
+                    _buildHeader(context),
+                    buildVerticalDivider(context, 0.04),
+                    _buildSearchField(context),
+                    buildVerticalDivider(context, 0.04),
+                    _buildSectionTitle(context, "Categories"),
+                    _buildCategoriesList(context),
+                    _buildCategoriesImagesList(context),
+                    buildVerticalDivider(context, 0.04),
+                    _buildSectionTitle(context, "Best Seller"),
+                    buildVerticalDivider(context, 0.01),
+                    _buildBestSellerList(context),
+                    buildVerticalDivider(context, 0.02),
+                  ],
+                ),
+              );
+              break;
+          }
+        },
       ),
     );
   }
@@ -215,7 +227,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildCategoriesImagesList(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.pushNamed(context, AppRoute.productDisplayScreen);
       },
       child: Container(
@@ -373,8 +385,8 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildFloatingActionButton(BuildContext context,   final String uniqueTag)
-  {
+  Widget _buildFloatingActionButton(
+      BuildContext context, final String uniqueTag) {
     return CircleAvatar(
       radius: SizeConfig.width(context, 0.04),
       child: FloatingActionButton(
@@ -490,7 +502,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          _buildFloatingActionButton(context,'Hero2'),
+          _buildFloatingActionButton(context, 'Hero2'),
         ],
       ),
     );

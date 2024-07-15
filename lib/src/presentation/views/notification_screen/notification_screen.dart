@@ -39,7 +39,7 @@ class _NotificationScreenState extends State<NotificationScreen> {
     return Scaffold(
         appBar: AppBar(
           elevation: 0,
-          backgroundColor: Colors.transparent,
+          backgroundColor: GlobalColor.bgColor,
           title: Container(
             padding:
             EdgeInsets.only(top: SizeConfig.height(context, 0.05)),

@@ -1,5 +1,8 @@
 import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:insight_artistry_updated/domain/repositories/product_repo.dart';
+import 'package:insight_artistry_updated/src/presentation/bloc/product/product_bloc.dart';
 import 'package:insight_artistry_updated/src/presentation/views/cart_screen/cart_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/favorite_screen/favorite_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/home_screen/dashboard_screen.dart';
@@ -15,8 +18,10 @@ import 'package:insight_artistry_updated/src/presentation/views/profile_screen/p
 import 'package:insight_artistry_updated/src/presentation/views/splash_screen.dart';
 
 import 'app/routes/app_route.dart';
-import 'core/constant/colors.dart';
+import 'constant/colors.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
+GetIt getIt = GetIt.instance;
 void main() {
   AwesomeNotifications().initialize(null, [
     NotificationChannel(
@@ -34,15 +39,23 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: GlobalColor.bgColor),
-          useMaterial3: true,
-          fontFamily: 'Montserrat'),
-      home: const SplashScreen(),
-      onGenerateRoute: _onGenerateRoute,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (_) => ProductBloc(),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        debugShowCheckedModeBanner: false,
+        theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: GlobalColor.bgColor),
+            useMaterial3: true,
+            fontFamily: 'Montserrat'),
+        home: HomeScreen(),
+        // home: const SplashScreen(),
+        onGenerateRoute: _onGenerateRoute,
+      ),
     );
   }
 
@@ -91,4 +104,7 @@ class MyApp extends StatelessWidget {
     assert(false, 'Need to implement ${routeSettings.name}');
     return null;
   }
+  void serviceLocator() {
+    // getIt.registerLazySingleton<ProductRepository>(() => AuthApiRepositoryImpl());
+    }
 }

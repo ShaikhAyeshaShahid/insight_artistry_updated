@@ -3,10 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
 import '../../../app/routes/app_route.dart';
-import '../../../core/constant/colors.dart';
-import '../../../core/constant/size_config.dart';
-import '../../../core/constant/string.dart';
-import 'login_signup_screens/login_screen.dart';
+import '../../../constant/colors.dart';
+import '../../../constant/size_config.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

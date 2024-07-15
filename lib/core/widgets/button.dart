@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:insight_artistry_updated/constant/colors.dart';
 
-import '../../../core/constant/size_config.dart';
+import '../../constant/size_config.dart';
+
 
 class ButtonWidget extends StatelessWidget {
   const ButtonWidget({
