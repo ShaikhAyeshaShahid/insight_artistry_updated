@@ -86,6 +86,8 @@ class _HomeScreenState extends State<HomeScreen> {
   Color color = const Color(0XFF7AC0FF);
   Color color2 = const Color(0XFF96B1FD);
   Color bgColor = const  Color(0XFF1752FE);
+  final String uniqueTag = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -364,18 +366,19 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ],
             ),
-            _buildFloatingActionButton(context),
+            _buildFloatingActionButton(context, 'Hearo1'),
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFloatingActionButton(BuildContext context)
+  Widget _buildFloatingActionButton(BuildContext context,   final String uniqueTag)
   {
     return CircleAvatar(
       radius: SizeConfig.width(context, 0.04),
       child: FloatingActionButton(
+        heroTag: uniqueTag,
         elevation: 0,
         onPressed: () {},
         backgroundColor: GlobalColor.head2TextColor,
@@ -487,7 +490,7 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
             ],
           ),
-          _buildFloatingActionButton(context),
+          _buildFloatingActionButton(context,'Hero2'),
         ],
       ),
     );

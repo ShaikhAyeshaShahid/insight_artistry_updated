@@ -39,6 +39,10 @@ dependencies:
   cart_item: ^0.0.1
   cart_stepper: ^4.3.0
   intl: ^0.19.0
+  overlay_support: ^2.1.0
+  awesome_notifications: ^0.9.3+1
+  flutter_slidable: ^3.1.1
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:
@@ -64,6 +68,7 @@ flutter:
 
   # To add assets to your application, add an assets section, like this:
   assets:
+     - assets/
      - assets/images/
      - assets/images/splash_img.jpg
      - assets/images/profile_icons/

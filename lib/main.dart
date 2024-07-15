@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:insight_artistry_updated/src/presentation/views/cart_screen/cart_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/favorite_screen/favorite_screen.dart';
@@ -17,6 +18,13 @@ import 'app/routes/app_route.dart';
 import 'core/constant/colors.dart';
 
 void main() {
+  AwesomeNotifications().initialize(null, [
+    NotificationChannel(
+        channelKey: 'basic_channel',
+        channelName: 'Basic Notification',
+        channelDescription: 'Basic Notification for basic test')
+  ],
+  debug: true);
   runApp(const MyApp());
 }
 
@@ -61,7 +69,8 @@ class MyApp extends StatelessWidget {
       return MaterialPageRoute(builder: (context) => const HomeScreen());
     }
     if (routeSettings.name == AppRoute.productDisplayScreen) {
-      return MaterialPageRoute(builder: (context) => const ProductDisplayScreen());
+      return MaterialPageRoute(
+          builder: (context) => const ProductDisplayScreen());
     }
     if (routeSettings.name == AppRoute.cartScreen) {
       return MaterialPageRoute(builder: (context) => const CartScreen());
@@ -73,7 +82,8 @@ class MyApp extends StatelessWidget {
       return MaterialPageRoute(builder: (context) => const FavoriteScreen());
     }
     if (routeSettings.name == AppRoute.notificationScreen) {
-      return MaterialPageRoute(builder: (context) => const NotificationScreen());
+      return MaterialPageRoute(
+          builder: (context) => const NotificationScreen());
     }
     if (routeSettings.name == AppRoute.profileScreen) {
       return MaterialPageRoute(builder: (context) => const ProfileScreen());

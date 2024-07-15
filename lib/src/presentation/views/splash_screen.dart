@@ -1,3 +1,4 @@
+import 'package:awesome_notifications/awesome_notifications.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 
@@ -17,6 +18,12 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
+    AwesomeNotifications().isNotificationAllowed().then((isAllowed){
+      if(!isAllowed)
+        {
+          AwesomeNotifications().requestPermissionToSendNotifications();
+        }
+    });
     // TODO: implement initState
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {

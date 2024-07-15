@@ -26,12 +26,6 @@ class _DashboardScreenState extends State<DashboardScreen> {
     HomeScreen(),
     CartScreen(),
     ProfileScreen()
-    /* Center(child: Text('Notification Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Favorite Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Home Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Cart Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Profile Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-*/
   ];
 
   List<TabItem> items = [
