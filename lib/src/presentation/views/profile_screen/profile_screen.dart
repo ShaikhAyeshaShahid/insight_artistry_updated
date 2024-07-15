@@ -28,10 +28,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
     "Log Out"
   ];
 
+  List<Color> _images2Bg =[
+    Color(0xff008BD9).withOpacity(0.1),
+    Color(0xffFFCC47).withOpacity(0.1),
+    Color(0xffF44545).withOpacity(0.1),
+  ];
+  List<Color> _images1Bg =[
+    Color(0xffD9D9D9).withOpacity(0.1),
+    Color(0xff1B94A1).withOpacity(0.1),
+    Color(0xffFD9F12).withOpacity(0.1),
+  ];
+
   List<String> _Images1 =[
     "assets/images/profile_icons/setting_icon.png",
     "assets/images/profile_icons/bell.png",
     "assets/images/profile_icons/clock.png",
+  ];
+  List<String> _Images2 =[
+    "assets/images/profile_icons/lock.png",
+    "assets/images/profile_icons/privacy.png",
+    "assets/images/profile_icons/logout.png",
   ];
   @override
   Widget build(BuildContext context) {
@@ -43,16 +59,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
           Container(
             padding: EdgeInsets.only(bottom: SizeConfig.height(context, 0.02)),
             width: SizeConfig.width(context, 1),
-            height: SizeConfig.height(context, 0.35),
+            height: SizeConfig.height(context, 0.3),
             color: Colors.white,
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
               children: [
                 Container(
                   padding:
-                      EdgeInsets.only(top: SizeConfig.height(context, 0.1)),
+                      EdgeInsets.only(top: SizeConfig.height(context, 0.05)),
                   width: SizeConfig.width(context, 1),
-                  height: SizeConfig.height(context, 0.15),
+                  height: SizeConfig.height(context, 0.1),
                   child: Text(
                     "My Profile",
                     style: TextStyle(
@@ -62,7 +78,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                     textAlign: TextAlign.center,
                   ),
                 ),
-                Container(
+                SizedBox(
                   width: SizeConfig.width(context, 0.25),
                   height: SizeConfig.height(context, 0.1),
                   child: Stack(
@@ -95,63 +111,67 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           ),
-          HeadingTextWidget(text: "Account", fontSize: SizeConfig.width(context, 0.05),color: GlobalColor.productDisColor,),
+          Padding(
+            padding: EdgeInsets.only(left: SizeConfig.width(context,0.05), top: SizeConfig.height(context, 0.04),),
+            child: HeadingTextWidget(text: "Account", fontSize: SizeConfig.width(context, 0.04),color: GlobalColor.productDisColor,),
+          ),
           Expanded(
-            child: Container(
-              padding: EdgeInsets.only(left: SizeConfig.width(context, 0.025)),
-              width: SizeConfig.width(context, 1),
-              height: SizeConfig.height(context, 0.65),
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: _options1.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    child: ListTile(
-                      leading: Image.asset(_Images1[index],),
-                      trailing: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_sharp, color: GlobalColor.head2TextColor,),),
-                      title: SubHeadingTextWidget(
-                        text: _options1[index],
-                        fontSize: SizeConfig.width(context, 0.05),
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: _options1.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Container(width:SizeConfig.width(context, 0.1),
+                      decoration: BoxDecoration(
+                        color: _images1Bg[index],
+                        borderRadius: BorderRadius.circular(SizeConfig.width(context, 0.02))
                       ),
+                      child: Image.asset(_Images1[index],scale: SizeConfig.width(context, 0.004),)),
+                  trailing: SizedBox(width: SizeConfig.width(context, 0.1),
+                      child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_sharp, color: GlobalColor.head2TextColor,),)),
+                  title: Container(
+                    width: SizeConfig.width(context, 0.1),
+                    alignment: AlignmentDirectional.centerStart,
+                    child: SubHeadingTextWidget(
+                      text: _options1[index],
+                      fontSize: SizeConfig.width(context, 0.04),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           ),
-          /*Expanded(
-            child: Container(
-              padding: EdgeInsets.only(left: SizeConfig.width(context, 0.025)),
-              width: SizeConfig.width(context, 1),
-              height: SizeConfig.height(context, 0.65),
-              child: ListView.builder(
-                scrollDirection: Axis.vertical,
-                itemCount: _options1.length,
-                itemBuilder: (context, index) {
-                  return Container(
-                    margin: EdgeInsets.symmetric(
-                      vertical: SizeConfig.height(context, 0.02),
-                      horizontal: SizeConfig.width(context, 0.02),
-                    ),
-                    decoration: BoxDecoration(
-                      color: GlobalColor.head2TextColor,
-                      borderRadius:
-                          BorderRadius.circular(SizeConfig.width(context, 0.08)),
-                    ),
-                    child: IntrinsicWidth(
-                      child: ListTile(
-                        title: SubHeadingTextWidget(
-                          text: _options1[index],
-                          color: Colors.white,
-                          fontSize: SizeConfig.width(context, 0.04),
-                        ),
+          Padding(
+            padding: EdgeInsets.only(left: SizeConfig.width(context,0.05), top: SizeConfig.height(context, 0.04),),
+            child: HeadingTextWidget(text: "Account", fontSize: SizeConfig.width(context, 0.04),color: GlobalColor.productDisColor,),
+          ),
+
+          Expanded(
+            child: ListView.builder(
+              scrollDirection: Axis.vertical,
+              itemCount: _options2.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  leading: Container(width:SizeConfig.width(context, 0.1),
+                      decoration: BoxDecoration(
+                          color: _images2Bg[index],
+                          borderRadius: BorderRadius.circular(SizeConfig.width(context, 0.02))
                       ),
+                      child: Image.asset(_Images2[index],scale: SizeConfig.width(context, 0.004),)),
+                  trailing: SizedBox(width: SizeConfig.width(context, 0.1),
+                      child: IconButton(onPressed: (){}, icon: Icon(Icons.arrow_forward_ios_sharp, color: GlobalColor.head2TextColor,),)),
+                  title: Container(
+                    width: SizeConfig.width(context, 0.1),
+                    alignment: AlignmentDirectional.centerStart,
+                    child: SubHeadingTextWidget(
+                      text: _options2[index],
+                      fontSize: SizeConfig.width(context, 0.04),
                     ),
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
-          ),*/
+          ),
         ],
       ),
     );
