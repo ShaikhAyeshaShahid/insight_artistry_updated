@@ -21,8 +21,8 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     SchedulerBinding.instance.addPostFrameCallback((timeStamp) {
       Future.delayed(Duration(seconds: 3), () {
-        Navigator.pushReplacementNamed(context, AppRoute.dashboardScreen);
-        // Navigator.pushReplacementNamed(context, AppRoute.onboardingScreen1);
+        // Navigator.pushReplacementNamed(context, AppRoute.dashboardScreen);
+        Navigator.pushReplacementNamed(context, AppRoute.onboardingScreen1);
       });
     });
   }
