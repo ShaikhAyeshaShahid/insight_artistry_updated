@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:insight_artistry_updated/data/repositories_impl/repo_impl.dart';
+import 'package:insight_artistry_updated/domain/usecase/login.dart';
+import 'package:insight_artistry_updated/src/presentation/cubit/login/login_cubit.dart';
 import 'package:insight_artistry_updated/src/presentation/views/cart_screen/cart_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/favorite_screen/favorite_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/home_screen/dashboard_screen.dart';
@@ -52,7 +56,7 @@ class MyApp extends StatelessWidget {
       return MaterialPageRoute(builder: (context) => const OnboardingScreen3());
     }
     if (routeSettings.name == AppRoute.loginScreen) {
-      return MaterialPageRoute(builder: (context) => const LoginScreen());
+      return MaterialPageRoute(builder: (context) => _loginScreen());
     }
     if (routeSettings.name == AppRoute.signUpScreen) {
       return MaterialPageRoute(builder: (context) => const SignUpScreen());
@@ -81,4 +85,14 @@ class MyApp extends StatelessWidget {
     assert(false, 'Need to implement ${routeSettings.name}');
     return null;
   }
+
+  BlocProvider<LoginCubit> _loginScreen() {
+    return BlocProvider<LoginCubit>(
+        create: (context) =>
+            LoginCubit(LoginUsecase(repository: repository)),
+        child: LoginScreen());
+  }
 }
+
+var repository = InsightArtistyRepositoryImpl();
+
