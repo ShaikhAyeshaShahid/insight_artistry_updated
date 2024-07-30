@@ -16,11 +16,30 @@ class SignUpScreen extends StatefulWidget {
   State<SignUpScreen> createState() => _SignUpScreenState();
 }
 
-class _SignUpScreenState extends State<SignUpScreen> {
+class _SignUpScreenState extends State<SignUpScreen>
+    with SingleTickerProviderStateMixin {
   TextEditingController nameController = TextEditingController();
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
   TextEditingController confirmPasswordController = TextEditingController();
+
+  late Animation<double> logoFadeAnimation;
+  late AnimationController controller;
+  late Animation<Offset> slideAnimation;
+  late Animation<double> scaleAnimation;
+
+  @override
+  void initState() {
+    controller = AnimationController(
+        vsync: this, duration: const Duration(milliseconds: 2000));
+    logoFadeAnimation = Tween<double>(begin: 0, end: 1).animate(controller);
+    slideAnimation = Tween(begin: const Offset(-1, -1), end: Offset.zero)
+        .animate(CurvedAnimation(parent: controller, curve: Curves.ease));
+    scaleAnimation = Tween<double>(begin: 0, end: 1)
+        .animate(CurvedAnimation(parent: controller, curve: Curves.ease));
+    controller.forward();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,70 +53,89 @@ class _SignUpScreenState extends State<SignUpScreen> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(
-                  height: SizeConfig.height(context, 0.2),
-                  width: SizeConfig.width(context, 0.8),
-                  child: Image.asset(
-                    'assets/images/logo.png',
-                    fit: BoxFit.contain,
+                FadeTransition(
+                  opacity: logoFadeAnimation,
+                  child: SizedBox(
+                    height: SizeConfig.height(context, 0.2),
+                    width: SizeConfig.width(context, 0.8),
+                    child: Image.asset(
+                      'assets/images/logo.png',
+                      fit: BoxFit.contain,
+                    ),
                   ),
                 ),
                 SizedBox(height: SizeConfig.height(context, 0.02)),
-                Padding(
-                  padding: EdgeInsets.symmetric(
-                      horizontal: SizeConfig.width(context, 0.04),
-                      vertical: SizeConfig.height(context, 0.01)),
-                  child: HeadingTextWidget(
-                    text: "Create an Account",
-                    fontSize: SizeConfig.height(context, 0.03),
-                    color: GlobalColor.head2TextColor,
+                SlideTransition(
+                  position: slideAnimation,
+                  child: ScaleTransition(
+                    scale: scaleAnimation,
+                    child: Column(
+                      children: [
+                        Padding(
+                          padding: EdgeInsets.symmetric(
+                              horizontal: SizeConfig.width(context, 0.04),
+                              vertical: SizeConfig.height(context, 0.01)),
+                          child: HeadingTextWidget(
+                            text: "Create an Account",
+                            fontSize: SizeConfig.height(context, 0.03),
+                            color: GlobalColor.head2TextColor,
+                          ),
+                        ),
+                        buildVerticalDivider(context, 0.04),
+                        TextFieldWidget(
+                          textEditingController: nameController,
+                          textInputType: TextInputType.text,
+                          obscureText: false,
+                          icon: true,
+                          prefixIcon: Icon(Icons.person,
+                              color: GlobalColor.head2TextColor),
+                          isSuffixIcon: false,
+                          readOnly: false,
+                          hint: "Name",
+                        ),
+                        buildVerticalDivider(context, 0.03),
+                        TextFieldWidget(
+                          textEditingController: emailController,
+                          textInputType: TextInputType.emailAddress,
+                          obscureText: false,
+                          icon: true,
+                          prefixIcon: Icon(Icons.mail,
+                              color: GlobalColor.head2TextColor),
+                          isSuffixIcon: false,
+                          readOnly: false,
+                          hint: "Email",
+                        ),
+                        buildVerticalDivider(context, 0.03),
+                        TextFieldWidget(
+                          textEditingController: passwordController,
+                          textInputType: TextInputType.visiblePassword,
+                          obscureText: true,
+                          icon: true,
+                          prefixIcon: Icon(Icons.lock,
+                              color: GlobalColor.head2TextColor),
+                          suffixIcon: Icon(Icons.visibility,
+                              color: GlobalColor.head2TextColor),
+                          isSuffixIcon: true,
+                          readOnly: false,
+                          hint: "Password",
+                        ),
+                        buildVerticalDivider(context, 0.03),
+                        TextFieldWidget(
+                          textEditingController: confirmPasswordController,
+                          textInputType: TextInputType.visiblePassword,
+                          obscureText: true,
+                          icon: true,
+                          prefixIcon: Icon(Icons.lock,
+                              color: GlobalColor.head2TextColor),
+                          suffixIcon: Icon(Icons.visibility,
+                              color: GlobalColor.head2TextColor),
+                          isSuffixIcon: true,
+                          readOnly: false,
+                          hint: "Confirm Password",
+                        ),
+                      ],
+                    ),
                   ),
-                ),
-                buildVerticalDivider(context, 0.04),
-                TextFieldWidget(
-                  textEditingController: nameController,
-                  textInputType: TextInputType.text,
-                  obscureText: false,
-                  icon: true,
-                  prefixIcon: Icon(Icons.person, color: GlobalColor.head2TextColor),
-                  isSuffixIcon: false,
-                  readOnly: false,
-                  hint: "Name",
-                ),
-                buildVerticalDivider(context, 0.03),
-                TextFieldWidget(
-                  textEditingController: emailController,
-                  textInputType: TextInputType.emailAddress,
-                  obscureText: false,
-                  icon: true,
-                  prefixIcon: Icon(Icons.mail, color: GlobalColor.head2TextColor),
-                  isSuffixIcon: false,
-                  readOnly: false,
-                  hint: "Email",
-                ),
-                buildVerticalDivider(context, 0.03),
-                TextFieldWidget(
-                  textEditingController: passwordController,
-                  textInputType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  icon: true,
-                  prefixIcon: Icon(Icons.lock, color: GlobalColor.head2TextColor),
-                  suffixIcon: Icon(Icons.visibility, color: GlobalColor.head2TextColor),
-                  isSuffixIcon: true,
-                  readOnly: false,
-                  hint: "Password",
-                ),
-                buildVerticalDivider(context, 0.03),
-                TextFieldWidget(
-                  textEditingController: confirmPasswordController,
-                  textInputType: TextInputType.visiblePassword,
-                  obscureText: true,
-                  icon: true,
-                  prefixIcon: Icon(Icons.lock, color: GlobalColor.head2TextColor),
-                  suffixIcon: Icon(Icons.visibility, color: GlobalColor.head2TextColor),
-                  isSuffixIcon: true,
-                  readOnly: false,
-                  hint: "Confirm Password",
                 ),
                 buildVerticalDivider(context, 0.05),
                 ButtonWidget(

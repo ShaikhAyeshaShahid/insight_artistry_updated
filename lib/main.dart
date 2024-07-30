@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insight_artistry_updated/data/repositories_impl/repo_impl.dart';
 import 'package:insight_artistry_updated/domain/usecase/login.dart';
+import 'package:insight_artistry_updated/domain/usecase/product_list.dart';
 import 'package:insight_artistry_updated/src/presentation/cubit/login/login_cubit.dart';
+import 'package:insight_artistry_updated/src/presentation/cubit/product_list/product_list_cubit.dart';
 import 'package:insight_artistry_updated/src/presentation/views/cart_screen/cart_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/favorite_screen/favorite_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/home_screen/dashboard_screen.dart';
@@ -11,8 +13,6 @@ import 'package:insight_artistry_updated/src/presentation/views/login_signup_scr
 import 'package:insight_artistry_updated/src/presentation/views/login_signup_screens/signup_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/notification_screen/notification_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/onboarding_screens/onboarding_screens_1.dart';
-import 'package:insight_artistry_updated/src/presentation/views/onboarding_screens/onboarding_screens_2.dart';
-import 'package:insight_artistry_updated/src/presentation/views/onboarding_screens/onboarding_screens_3.dart';
 import 'package:insight_artistry_updated/src/presentation/views/product_display_screen/product_display_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/profile_screen/profile_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/splash_screen.dart';
@@ -46,15 +46,13 @@ class MyApp extends StatelessWidget {
     if (routeSettings.name == AppRoute.splashScreen) {
       return MaterialPageRoute(builder: (context) => const SplashScreen());
     }
+    if (routeSettings.name == AppRoute.homeScreen) {
+      return MaterialPageRoute(builder: (context) => _homeDashboard());
+    }
     if (routeSettings.name == AppRoute.onboardingScreen1) {
       return MaterialPageRoute(builder: (context) => const OnboardingScreen1());
     }
-    if (routeSettings.name == AppRoute.onboardingScreen2) {
-      return MaterialPageRoute(builder: (context) => const OnboardingScreen2());
-    }
-    if (routeSettings.name == AppRoute.onboardingScreen3) {
-      return MaterialPageRoute(builder: (context) => const OnboardingScreen3());
-    }
+
     if (routeSettings.name == AppRoute.loginScreen) {
       return MaterialPageRoute(builder: (context) => _loginScreen());
     }
@@ -91,6 +89,12 @@ class MyApp extends StatelessWidget {
         create: (context) =>
             LoginCubit(LoginUsecase(repository: repository)),
         child: LoginScreen());
+  }
+  BlocProvider<ProductListCubit> _homeDashboard() {
+    return BlocProvider<ProductListCubit>(
+        create: (context) =>
+            ProductListCubit(ProductListUsecase(repository)),
+        child: HomeScreen());
   }
 }
 

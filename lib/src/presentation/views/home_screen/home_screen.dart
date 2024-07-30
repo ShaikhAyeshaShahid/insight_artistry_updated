@@ -1,9 +1,11 @@
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
 import 'package:awesome_bottom_bar/tab_item.dart';
-import 'package:awesome_bottom_bar/widgets/inspired/inspired.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:insight_artistry_updated/app/routes/app_route.dart';
 import 'package:insight_artistry_updated/core/widgets/sub_heading.dart';
+import 'package:insight_artistry_updated/domain/entities/ProductDetail.dart';
+import 'package:insight_artistry_updated/src/presentation/cubit/product_list/product_list_cubit.dart';
 
 import '../../../../constant/colors.dart';
 import '../../../../constant/divider.dart';
@@ -19,6 +21,8 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  bool isExpanded = false;
+
   TextEditingController _searchController = TextEditingController();
 
   List<String> _categories = [
@@ -47,45 +51,45 @@ class _HomeScreenState extends State<HomeScreen> {
   ];
 
   List<TabItem> items = [
-    TabItem(
+    const TabItem(
       icon: Icons.notifications_none_sharp,
       title: 'Notification',
     ),
-    TabItem(
+    const TabItem(
       icon: Icons.favorite_border_sharp,
       title: 'Favorite',
     ),
-    TabItem(
+    const TabItem(
       icon: Icons.home_outlined,
       title: 'Home',
     ),
-    TabItem(
+    const TabItem(
       icon: Icons.shopping_cart_outlined,
       title: 'Cart',
     ),
-    TabItem(
+    const TabItem(
       icon: Icons.account_box,
       title: 'profile',
     ),
   ];
 
-
-  List<Widget> _screens = [
-    Center(child: Text('Notification Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Favorite Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Home Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Cart Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Profile Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-  ];
-
-
-
   int visit = 0;
   double height = 30;
-  Color colorSelect =const Color(0XFF0686F8);
+  Color colorSelect = const Color(0XFF0686F8);
   Color color = const Color(0XFF7AC0FF);
   Color color2 = const Color(0XFF96B1FD);
-  Color bgColor = const  Color(0XFF1752FE);
+  Color bgColor = const Color(0XFF1752FE);
+
+  late ProductListCubit productListCubit;
+  List<ProductDetail> productList = [];
+
+  @override
+  void initState() {
+    super.initState();
+    productListCubit = BlocProvider.of<ProductListCubit>(context);
+    productListCubit.productList();
+    print("Product list $productList");
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -181,14 +185,18 @@ class _HomeScreenState extends State<HomeScreen> {
     return Container(
       padding: EdgeInsets.only(left: SizeConfig.width(context, 0.025)),
       width: SizeConfig.width(context, 1),
-      height: SizeConfig.height(context, 0.1),
+      height: SizeConfig.height(context, 0.07),
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
         itemCount: _categories.length,
         itemBuilder: (context, index) {
           return Container(
+            padding: EdgeInsets.symmetric(
+              horizontal: SizeConfig.width(context, 0.02),
+              vertical: SizeConfig.height(context, 0.01),
+            ),
             margin: EdgeInsets.symmetric(
-              vertical: SizeConfig.height(context, 0.02),
+              vertical: SizeConfig.height(context, 0.01),
               horizontal: SizeConfig.width(context, 0.02),
             ),
             decoration: BoxDecoration(
@@ -196,7 +204,12 @@ class _HomeScreenState extends State<HomeScreen> {
               borderRadius:
                   BorderRadius.circular(SizeConfig.width(context, 0.08)),
             ),
-            child: IntrinsicWidth(
+            child: SubHeadingTextWidget(
+              text: _categories[index],
+              color: Colors.white,
+              fontSize: SizeConfig.width(context, 0.04),
+            ),
+            /*IntrinsicWidth(
               child: ListTile(
                 title: SubHeadingTextWidget(
                   text: _categories[index],
@@ -204,7 +217,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   fontSize: SizeConfig.width(context, 0.04),
                 ),
               ),
-            ),
+            ),*/
           );
         },
       ),
@@ -213,7 +226,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildCategoriesImagesList(BuildContext context) {
     return GestureDetector(
-      onTap: (){
+      onTap: () {
         Navigator.pushNamed(context, AppRoute.productDisplayScreen);
       },
       child: Container(
@@ -233,7 +246,8 @@ class _HomeScreenState extends State<HomeScreen> {
 
   Widget _buildCategoryItem(BuildContext context, int index) {
     return Container(
-      width: SizeConfig.width(context, 0.46),
+      height: SizeConfig.height(context, 0.4),
+      width: SizeConfig.width(context, 0.47),
       margin: EdgeInsets.symmetric(horizontal: SizeConfig.width(context, 0.02)),
       decoration: BoxDecoration(
         color: Colors.white,
@@ -334,15 +348,16 @@ class _HomeScreenState extends State<HomeScreen> {
     return Positioned(
       bottom: 15,
       left: SizeConfig.width(context, 0.025),
-      child: SizedBox(
-        height: SizeConfig.height(context, 0.08),
-        width: SizeConfig.width(context, 0.4),
+      child: Container(
+        margin: EdgeInsets.only(right: SizeConfig.width(context, 0.02),),
+        height: SizeConfig.height(context, 0.09),
+        width: SizeConfig.width(context, 0.47),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 SubHeadingTextWidget(
                   text: title,
@@ -365,23 +380,49 @@ class _HomeScreenState extends State<HomeScreen> {
               ],
             ),
             _buildFloatingActionButton(context),
+            buildHorizontalDivider(context, 0.025)
           ],
         ),
       ),
     );
   }
 
-  Widget _buildFloatingActionButton(BuildContext context)
-  {
-    return CircleAvatar(
-      radius: SizeConfig.width(context, 0.04),
+  Widget _buildFloatingActionButton(BuildContext context) {
+    return AnimatedContainer(
+      clipBehavior: Clip.hardEdge,
+      duration: Duration(milliseconds: 1000),
+      width: SizeConfig.width(context, isExpanded ? 0.16 : 0.08),
+      height: SizeConfig.height(context, 0.04),
+      decoration: BoxDecoration(
+        // color: isExpanded ? GlobalColor.head2TextColor : Colors.blue,
+        borderRadius: BorderRadius.circular(
+            SizeConfig.width(context, isExpanded ? 0.05 : 0.04)),
+      ),
       child: FloatingActionButton(
         elevation: 0,
-        onPressed: () {},
+        onPressed: () {
+          setState(() {
+            isExpanded = !isExpanded;
+          });
+        },
         backgroundColor: GlobalColor.head2TextColor,
-        child: const Icon(
-          Icons.add,
-          color: Colors.white,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          children: [
+            Icon(
+              isExpanded ? Icons.check : Icons.add,
+              color: Colors.white,
+              size:  isExpanded ? SizeConfig.width(context, 0.03) : SizeConfig.width(context, 0.05),
+            ),
+            if (isExpanded)
+              Text(
+                "Added",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: SizeConfig.width(context, 0.03),
+                ),
+              ),
+          ],
         ),
       ),
     );
@@ -439,7 +480,7 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget _buildBestSellerImage(BuildContext context) {
     return Container(
       height: SizeConfig.height(context, 0.26),
-      width: SizeConfig.width(context, 0.3),
+      width: SizeConfig.width(context, 0.25),
       margin: EdgeInsets.symmetric(
         horizontal: SizeConfig.width(context, 0.02),
         vertical: SizeConfig.height(context, 0.01),
@@ -458,9 +499,9 @@ class _HomeScreenState extends State<HomeScreen> {
       BuildContext context, String title, String subtitle, String price) {
     return SizedBox(
       height: SizeConfig.height(context, 0.12),
-      width: SizeConfig.width(context, 0.4),
+      width: SizeConfig.width(context, 0.445),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
           Column(

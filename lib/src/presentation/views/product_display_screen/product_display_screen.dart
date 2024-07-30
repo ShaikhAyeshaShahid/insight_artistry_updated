@@ -41,19 +41,58 @@ class _ProductDisplayScreenState extends State<ProductDisplayScreen> {
 
   double _dCounter = 0.01;
 
+  bool isExpanded = false;
+
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: ButtonWidget(
-        marginWidth: SizeConfig.width(context, 0.05),
-        marginHeight: SizeConfig.height(context, 0.01),
-        onTab: () {
-          Navigator.pushNamed(context, AppRoute.cartScreen);
-        },
-        text: "Add to cart | \$12,500",
-        fontSize: SizeConfig.width(context, 0.04),
-        fontWeight: FontWeight.w800,
+      bottomNavigationBar:  AnimatedContainer(
+        duration: Duration(milliseconds: 1000),
+        child: ButtonWidget(
+          marginWidth: SizeConfig.width(context, 0.05),
+          marginHeight: SizeConfig.height(context, 0.01),
+          onTab: () {
+            setState(() {
+              isExpanded = !isExpanded;
+            });
+            Navigator.pushNamed(context, AppRoute.cartScreen);
+          },
+          text: isExpanded ? "Add to cart | \$12,500" : "Added Successfully",
+          fontSize: SizeConfig.width(context, 0.04),
+          fontWeight: FontWeight.w800,
+        ),
       ),
+      /*GestureDetector(
+        onTap: () {
+          setState(() {
+            isExpanded = !isExpanded;
+          });
+        },
+        child: AnimatedContainer(
+          duration: Duration(milliseconds: 1000),
+          width: isExpanded ? 200 : 80.0,
+          height: 60.0,
+          decoration: BoxDecoration(
+            color: isExpanded ? Colors.green : Colors.blue,
+            borderRadius: BorderRadius.circular(isExpanded ? 30 : 10.0),
+          ),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              Icon(
+                isExpanded ? Icons.check : Icons.shopping_cart_outlined,
+                color: Colors.white,
+              ),
+              if (isExpanded)
+                Text(
+                  "Added to Cart",
+                  style: TextStyle(color: Colors.white, fontSize: 16),
+                ),
+            ],
+          ),
+        ),
+      ),*/
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,

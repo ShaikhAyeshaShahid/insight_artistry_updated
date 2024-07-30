@@ -1,5 +1,4 @@
 import 'package:awesome_bottom_bar/awesome_bottom_bar.dart';
-import 'package:awesome_bottom_bar/tab_item.dart';
 import 'package:flutter/material.dart';
 import 'package:insight_artistry_updated/src/presentation/views/cart_screen/cart_screen.dart';
 import 'package:insight_artistry_updated/src/presentation/views/favorite_screen/favorite_screen.dart';
@@ -21,37 +20,31 @@ class _DashboardScreenState extends State<DashboardScreen> {
   int visit = 2; // Set initial tab index to "Home"
 
   List<Widget> _screens = [
-    NotificationScreen(),
-    FavoriteScreen(),
-    HomeScreen(),
-    CartScreen(),
-    ProfileScreen()
-    /* Center(child: Text('Notification Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Favorite Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Home Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Cart Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-    Center(child: Text('Profile Screen', style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold))),
-*/
+    const NotificationScreen(),
+    const FavoriteScreen(),
+    const HomeScreen(),
+    const CartScreen(),
+    const ProfileScreen()
   ];
 
   List<TabItem> items = [
-    TabItem(
+    const TabItem(
       icon: Icons.notifications_none_sharp,
       title: 'Notification',
     ),
-    TabItem(
+    const TabItem(
       icon: Icons.favorite_border_sharp,
       title: 'Favorite',
     ),
-    TabItem(
+    const TabItem(
       icon: Icons.home_outlined,
       title: 'Home',
     ),
-    TabItem(
+    const TabItem(
       icon: Icons.shopping_cart_outlined,
       title: 'Cart',
     ),
-    TabItem(
+    const TabItem(
       icon: Icons.account_box,
       title: 'Profile',
     ),

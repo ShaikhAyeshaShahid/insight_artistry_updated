@@ -20,6 +20,9 @@ class CartScreen extends StatefulWidget {
 }
 
 class _CartScreenState extends State<CartScreen> {
+
+
+
   List<String> _categories = [
     'Abstract',
     'Realism',
@@ -141,7 +144,7 @@ class _CartScreenState extends State<CartScreen> {
       BuildContext context, String title, String subtitle, String price) {
     return Container(
       height: SizeConfig.height(context, 0.12),
-      width: SizeConfig.width(context, 0.5),
+      width: SizeConfig.width(context, 0.49),
       margin: EdgeInsets.symmetric(vertical: SizeConfig.height(context, 0.01),),
       child: Row(
         // mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -322,7 +325,7 @@ class _CartScreenState extends State<CartScreen> {
       bottom: 15,
       left: SizeConfig.width(context, 0.025),
       child: SizedBox(
-        height: SizeConfig.height(context, 0.08),
+        height: SizeConfig.height(context, 0.081),
         width: SizeConfig.width(context, 0.4),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
